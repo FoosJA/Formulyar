@@ -1,0 +1,43 @@
+﻿<Window x:Class="Formulyar.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Formulyar.ViewModel"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"        
+        Title="Настройка" Height="330" Width="300">
+    <Window.DataContext>
+        <local:AppViewModel/>
+    </Window.DataContext>
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Background="White" Header="Выполняемые проверки" Padding="5" Grid.Row="0" Grid.ColumnSpan="3">
+            <StackPanel>
+                <CheckBox x:Name="checkBoxKpos" Margin="3"  Checked="checkBoxKpos_Checked"  Unchecked="checkBoxKpos_Unchecked" Content="КПОС" />
+                <CheckBox x:Name="checkBoxMun" Margin="3"  Checked="checkBoxMun_Checked" Unchecked="checkBoxMun_Unchecked" Content="МУН" />
+                <CheckBox x:Name="checkBoxSmtnLine" Margin="3" Content="СМТН.ЛЭП" Checked="checkBoxSmtnLine_Checked" Unchecked="checkBoxSmtnLine_Unchecked" />
+                <CheckBox x:Name="checkBoxSmtnTransform" Margin="3" Content="СМТН.АТ(Т)" Checked="checkBoxSmtnTransform_Checked" Unchecked="checkBoxSmtnTransform_Unchecked"/>
+                <CheckBox x:Name="checkBoxSmtnBreaker" Margin="3" Content="СМТН.Выкл"  Checked="checkBoxSmtnBreaker_Checked" Unchecked="checkBoxSmtnBreaker_Unchecked"/>
+                <CheckBox x:Name="checkBoxSmtnDop" Margin="3"  Content="СМТН.ДОП" Checked="checkBoxSmtnDop_Checked" Unchecked="checkBoxSmtnDop_Unchecked"/>
+                <CheckBox x:Name="checkBoxSmtnAOPO" Margin="3"  Content="СМТН.АОПО" Checked="checkBoxSmtnAOPO_Checked" Unchecked="checkBoxSmtnAOPO_Unchecked"/>
+                <CheckBox x:Name="checkBoxAIP" Margin="3"  Content="АИП" Checked="checkBoxAIP_Checked" Unchecked="checkBoxAIP_Unchecked"/>
+                <CheckBox x:Name="checkBoxExchange" Margin="3" Content="Обмен ОТИ" Checked="checkBoxExchange_Checked" Unchecked="checkBoxExchange_Unchecked"/>
+                <CheckBox x:Name="checkBoxCIM" Margin="3" Content="ОИ в ИМ" Checked="checkBoxCIM_Checked" Unchecked="checkBoxCIM_Unchecked"/>
+            </StackPanel>
+
+        </GroupBox>
+        <Button Grid.Row="1" Width="90"  HorizontalAlignment="Left" Height="20" Margin="10" FontSize="12" Click="Button_Click">По умолчанию</Button>
+        <Button Grid.Row="1" Grid.Column="1" Width="70" HorizontalAlignment="Center" Height="20" FontSize="12" Click="Button_Click_2">Применить</Button>
+        <Button Grid.Row="1" Grid.Column="2" Width="60" HorizontalAlignment="Center" Height="20" FontSize="12" Click="Button_Click_1">Отмена</Button>
+    </Grid>
+</Window>

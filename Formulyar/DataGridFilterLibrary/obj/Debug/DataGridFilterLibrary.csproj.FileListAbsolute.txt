@@ -1,0 +1,13 @@
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\bin\Debug\DataGridFilterLibrary.dll
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\bin\Debug\DataGridFilterLibrary.pdb
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.csproj.AssemblyReference.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary_MarkupCompile.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary_MarkupCompile.lref
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\Themes\Generic.baml
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.g.resources
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.Properties.Resources.resources
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.csproj.GenerateResource.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.csproj.CoreCompileInputs.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.dll
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Debug\DataGridFilterLibrary.pdb

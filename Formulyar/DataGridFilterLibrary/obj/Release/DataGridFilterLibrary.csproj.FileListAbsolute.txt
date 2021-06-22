@@ -1,0 +1,10 @@
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\bin\Release\DataGridFilterLibrary.dll
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary_MarkupCompile.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary_MarkupCompile.lref
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\Themes\Generic.baml
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary.g.resources
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary.Properties.Resources.resources
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary.csproj.GenerateResource.Cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary.csproj.CoreCompileInputs.cache
+C:\FoosUA\Formulyar\Formulyar\DataGridFilterLibrary\obj\Release\DataGridFilterLibrary.dll

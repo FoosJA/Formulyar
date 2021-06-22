@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formulyar", "Formulyar\Formulyar.csproj", "{C24B7FA2-E4E1-4497-BA61-215D654C771D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGridFilterLibrary", "Formulyar\DataGridFilterLibrary\DataGridFilterLibrary.csproj", "{512FD53F-9AD1-46A1-A961-9FABDFAD50C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C24B7FA2-E4E1-4497-BA61-215D654C771D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24B7FA2-E4E1-4497-BA61-215D654C771D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24B7FA2-E4E1-4497-BA61-215D654C771D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24B7FA2-E4E1-4497-BA61-215D654C771D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512FD53F-9AD1-46A1-A961-9FABDFAD50C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512FD53F-9AD1-46A1-A961-9FABDFAD50C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512FD53F-9AD1-46A1-A961-9FABDFAD50C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512FD53F-9AD1-46A1-A961-9FABDFAD50C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CE9D216-E2EA-4570-B74E-9BC022002E60}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://vmtfs2015-odusv:8080/tfs/odusv_collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Formulyar\\DataGridFilterLibrary\\DataGridFilterLibrary.csproj
+		SccProjectName1 = Formulyar/DataGridFilterLibrary
+		SccLocalPath1 = Formulyar\\DataGridFilterLibrary
+		SccProjectUniqueName2 = Formulyar\\Formulyar.csproj
+		SccProjectName2 = Formulyar
+		SccLocalPath2 = Formulyar
+	EndGlobalSection
+EndGlobal

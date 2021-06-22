@@ -1,0 +1,23 @@
+﻿<Window x:Class="Formulyar.WaitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Icon="/DataGridFilterLibrary;component/Resources/iconWindow.png"
+        xmlns:local="clr-namespace:Formulyar"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"        
+        WindowStyle="None"
+        Height="100" Width="300" WindowStartupLocation="CenterScreen" Cursor="Wait">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <ProgressBar Name="progress" IsIndeterminate="True" Grid.Row="1" Height="30"  Margin="20 0" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,0,0,0" Name="textBlock1" Text="Идет загрузка..." VerticalAlignment="Center" />
+
+    </Grid>
+</Window>
