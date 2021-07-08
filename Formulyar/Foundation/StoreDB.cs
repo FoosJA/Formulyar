@@ -134,7 +134,7 @@ namespace Formulyar.Foundation
 
             var serverName = Properties.Settings.Default.ServerName ?? @"ck07-test3";
             var dbName = Properties.Settings.Default.DataBaseName ?? @"master";
-            var query = @"select * from LSA_test..OIKNP";
+            var query = @"select * from LSA_test..OIK_NP";
             var strBuilder = new SqlConnectionStringBuilder()
             {
                 DataSource = serverName,
@@ -151,73 +151,88 @@ namespace Formulyar.Foundation
                     var reader = com.ExecuteReader();
                     while (reader.Read())
                     {
+
                         string str = (string)reader[2];
                         string type = "";
-                        switch (str.Substring(0, 1))
+                        int id = 0;
+                        if (str == "")
                         {
-                            case "I":
-                                type = str.Replace("I", "ТИ").Substring(0, 2);
-                                break;
-                            case "S":
-                                type = str.Replace("S", "ТС").Substring(0, 2);
-                                break;
-                            case "J":
-                                type = str.Replace("J", "ИС").Substring(0, 2);
-                                break;
-                            case "C":
-                                type = str.Replace("C", "СП").Substring(0, 2);
-                                break;
-                            case "H":
-                                type = str.Replace("H", "ПВ").Substring(0, 2);
-                                break;
-                            case "M":
-                                type = str.Replace("M", "МСК").Substring(0, 2);
-                                break;
-                            case "P":
-                                type = str.Replace("P", "ПЛ").Substring(0, 2);
-                                break;                            
-                            case "U":
-                                type = str.Replace("U", "ЕИ").Substring(0, 2);
-                                break;
-                            case "W":
-                                type = str.Replace("W", "СВ").Substring(0, 2);
-                                break;
-                            case "Л":
-                                type = str.Replace("Л", "ЧАС").Substring(0, 2);
-                                break;
-                            case "Б":
-                                type = str.Replace("Б", "МИН").Substring(0, 2);
-                                break;
-                            case "Г":
-                                type = str.Replace("Г", "ПМИН").Substring(0, 2);
-                                break;
-                            case "З":
-                                type = str.Replace("З", "ДМИН").Substring(0, 2);
-                                break;
-                            case "И":
-                                type = str.Replace("И", "ЧЧАС").Substring(0, 2);
-                                break;
-                            case "К":
-                                type = str.Replace("К", "ПЧАС").Substring(0, 2);
-                                break;
-                            case "П":
-                                type = str.Replace("П", "СУТ").Substring(0, 2);
-                                break;
-                            case "У":
-                                type = str.Replace("У", "МЕС").Substring(0, 2);
-                                break;
-                            case "Ф":
-                                type = str.Replace("Ф", "ТМИН").Substring(0, 2);
-                                break;
-                            default:
-                                type = str.Substring(0, 1);
-                                break;
+                            str = (string)reader[1];
                         }
+                        str = str.Replace("Calc", string.Empty).Replace("Agr", string.Empty).Replace("aggr", string.Empty);
+                        switch (str.Substring(0, 1))
+                            {
+                                case "I":
+                                    type = str.Replace("I", "ТИ").Substring(0, 2);
+                                    break;
+                                case "S":
+                                    type = str.Replace("S", "ТС").Substring(0, 2);
+                                    break;
+                                case "J":
+                                    type = str.Replace("J", "ИС").Substring(0, 2);
+                                    break;
+                                case "C":
+                                    type = str.Replace("C", "СП").Substring(0, 2);
+                                    break;
+                                case "H":
+                                    type = str.Replace("H", "ПВ").Substring(0, 2);
+                                    break;
+                                case "M":
+                                    type = str.Replace("M", "МСК").Substring(0, 2);
+                                    break;
+                                case "P":
+                                    type = str.Replace("P", "ПЛ").Substring(0, 2);
+                                    break;
+                                case "U":
+                                    type = str.Replace("U", "ЕИ").Substring(0, 2);
+                                    break;
+                                case "W":
+                                    type = str.Replace("W", "СВ").Substring(0, 2);
+                                    break;
+                                case "Л":
+                                    type = str.Replace("Л", "ЧАС").Substring(0, 2);
+                                    break;
+                                case "Б":
+                                    type = str.Replace("Б", "МИН").Substring(0, 2);
+                                    break;
+                                case "Г":
+                                    type = str.Replace("Г", "ПМИН").Substring(0, 2);
+                                    break;
+                                case "З":
+                                    type = str.Replace("З", "ДМИН").Substring(0, 2);
+                                    break;
+                                case "И":
+                                    type = str.Replace("И", "ЧЧАС").Substring(0, 2);
+                                    break;
+                                case "К":
+                                    type = str.Replace("К", "ПЧАС").Substring(0, 2);
+                                    break;
+                                case "П":
+                                    type = str.Replace("П", "СУТ").Substring(0, 2);
+                                    break;
+                                case "У":
+                                    type = str.Replace("У", "МЕС").Substring(0, 2);
+                                    break;
+                                case "Ф":
+                                    type = str.Replace("Ф", "ТМИН").Substring(0, 2);
+                                    break;
+                                default:
+                                    type = str.Substring(0, 1);
+                                    break;
+                            }
+                        try
+                        {
+                            id = Convert.ToInt32(str.Remove(0, 1));
+                        }
+                        catch
+                        {
+                            id = 0;
+                        }     
                         CIMobjCollect.Add(new CIMObject()
                         {
                             UIDvalue = (string)reader[0],
                             Namevalue = (string)reader[1],
-                            SourceID =Convert.ToInt32(str.Remove(0,1)),
+                            SourceID = id,
                             Type= type,
                             HISvalue = (string)reader[3],
                             UIDparentObj = (string)reader[4],
