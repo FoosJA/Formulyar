@@ -139,6 +139,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Foundation\Инструкция по работе с ЛСА.docx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -165,6 +166,28 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1. Доп параметры.sql" />
+    <Content Include="2. Передача доп параметров.sql" />
+    <Content Include="3. Прием доп параметров.sql" />
+    <Content Include="Foundation\1. Табл вся ОТИ.sql" />
+    <Content Include="Foundation\10. Табл АОПО.sql" />
+    <Content Include="Foundation\11. Табл СМТН доп.sql" />
+    <Content Include="Foundation\2 вся ОИ передача.sql" />
+    <Content Include="Foundation\2. Табл Передачи ОТИ.sql" />
+    <Content Include="Foundation\3 вся ОИ прием.sql" />
+    <Content Include="Foundation\3. Табл Приема ОТИ.sql" />
+    <Content Include="Foundation\4. Табл КПОС.sql" />
+    <Content Include="Foundation\5. Табл МУН.sql" />
+    <Content Include="Foundation\6. Табл СМТН ЛЭП.sql" />
+    <Content Include="Foundation\7. Табл СМТН ЛЭП удаление дублей.sql" />
+    <Content Include="Foundation\8. Табл СМТН АТ%28Т%29.sql" />
+    <Content Include="Foundation\9. Табл СМТН Выкл.sql" />
+    <Content Include="Foundation\SQLquery.sql" />
+    <Content Include="Foundation\Общие Объекты контроля.sql" />
+    <Content Include="Foundation\ТИ АОПО.sql" />
+    <Content Include="Foundation\ТС АОПО.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
