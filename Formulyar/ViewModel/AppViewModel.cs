@@ -386,7 +386,7 @@ namespace Formulyar.ViewModel
            
                 ExchangeCollect = new ObservableCollection<ExchangeOTI>(result);*/
             ObservableCollection<ExchangeProtocol> exProtocolList = new ObservableCollection<ExchangeProtocol>();
-            string[] DC = new string[6] { "ОДУ Средней Волги", "Нижегородское РДУ", "Пензенское РДУ", "Самарское РДУ", "Саратовское РДУ", "РДУ Татарстана" };            
+            string[] DC = new string[6] { "ОДУ Средней Волги", "Нижегородское РДУ",  "Пензенское РДУ", "Самарское РДУ", "Саратовское РДУ", "РДУ Татарстана" };            
             if (triggerCheckCIM)
             {
                 ObservableCollection<CIMObject> otiCIMCollect = _database.GetOtiCIM();                
@@ -397,24 +397,24 @@ namespace Formulyar.ViewModel
                 {
                     try
                     {
-                        OperTechInform otiODU = OtiCollect.Single(x => x.DispatchCenter == DC[dc] && x.TypeOI== oi_CIM.Type && x.NumberOI == oi_CIM.SourceID);//ОИ в СК2007    
+                        OperTechInform otiODU = OtiCollect.Single(x => x.DispatchCenter == DC[dc] && x.TypeOI== oi_CIM.mvCat && x.NumberOI == oi_CIM.mvExternalId);//ОИ в СК2007    
                         ObservableCollection<ExchangeOTI> exchangeRec = new ObservableCollection<ExchangeOTI>(ExchangeCollect.Where(x => (x.NumberOIrec == otiODU.NumberOI && x.TypeOIrec == otiODU.TypeOI && x.DCreceiver == otiODU.DispatchCenter)));
                         ObservableCollection<ExchangeOTI> exchangeSour = new ObservableCollection<ExchangeOTI>(ExchangeCollect.Where(x => (x.NumberOIsour == otiODU.NumberOI && x.TypeOIsour == otiODU.TypeOI && x.DCsource == otiODU.DispatchCenter)));
-                        /*if (otiODU.TypeOI != "ТИ" && otiODU.TypeOI != "ТС" )
+                        if (otiODU.TypeOI != "ТИ" && otiODU.TypeOI != "ТС" && otiODU.NumberOI==2762)
                         {
                             dc = 0;
-                        }*/
+                        }
                         foreach (ExchangeOTI obmenRec in exchangeSour)
                         {
                             try
                             {
-                                CIMObject otiODUrecCIM = otiCIMCollect.Single(x => x.DC == obmenRec.DCreceiver &&
-                                x.Type == obmenRec.TypeOIrec &&
-                                x.SourceID== obmenRec.NumberOIrec);
+                                CIMObject otiODUrecCIM = otiCIMCollect.First(x => x.DC == obmenRec.DCreceiver &&
+                                x.mvCat == obmenRec.TypeOIrec &&
+                                x.mvExternalId== obmenRec.NumberOIrec);
                                 isSendCDU = SourceCollect.Any(x => x.NumberOIsour == otiODU.NumberOI && x.TypeOIsour == otiODU.TypeOI && x.DCsource == otiODU.DispatchCenter && x.DCreceiver == "ЦДУ ИА");
                                 if (isSendCDU == false)
                                     isSendCDU = SourceCollect.Any(x => x.NumberOIsour == otiODU.NumberOI && x.TypeOIsour == otiODU.TypeOI && x.DCsource == otiODU.DispatchCenter && x.DCreceiver == "РДЦ ЦДУ ИА");
-                                if (otiODUrecCIM.UIDparentObj != oi_CIM.UIDparentObj)
+                                if (otiODUrecCIM.poUID != oi_CIM.poUID)
                                 {
                                     exProtocolList.Add(new ExchangeProtocol()
                                     {
@@ -423,15 +423,15 @@ namespace Formulyar.ViewModel
                                         NameDCSource= otiODU.NameOI,
                                         CategoryDCSource = obmenRec.TypeOIsour,
                                         NumberOIsource= obmenRec.NumberOIsour,
-                                        UidDCSource= oi_CIM.UIDvalue,
-                                        PoDCSource= oi_CIM.UIDparentObj,
+                                        UidDCSource= oi_CIM.mvUID,
+                                        PoDCSource= oi_CIM.poUID,
 
                                         dcRec = obmenRec.DCreceiver,
-                                        NamedcRec = otiODUrecCIM.Namevalue,
+                                        NamedcRec = otiODUrecCIM.mvName,
                                         CategorydcRec = obmenRec.TypeOIrec,
                                         NumberOIrec = obmenRec.NumberOIrec,
-                                        UiddcRec = otiODUrecCIM.UIDvalue,
-                                        PodcRec = otiODUrecCIM.UIDparentObj,
+                                        UiddcRec = otiODUrecCIM.mvUID,
+                                        PodcRec = otiODUrecCIM.poUID,
                                         IsSendCDU = isSendCDU,
                                         Info = "Несоответсвие привязки в ИМ"
                                     });
@@ -454,7 +454,7 @@ namespace Formulyar.ViewModel
                                     });*/
 
                                 }                                    
-                                else if (otiODUrecCIM.MeasValueType != oi_CIM.MeasValueType)
+                                /*else if (otiODUrecCIM.MeasValueType != oi_CIM.MeasValueType)
                                     exProtocolList.Add(new ExchangeProtocol()
                                     {
                                         KontrolObjectName = otiODU.EnergyObject,
@@ -462,18 +462,18 @@ namespace Formulyar.ViewModel
                                         NameDCSource = otiODU.NameOI,
                                         CategoryDCSource = obmenRec.TypeOIsour,
                                         NumberOIsource = obmenRec.NumberOIsour,
-                                        UidDCSource = oi_CIM.UIDvalue,
-                                        PoDCSource = oi_CIM.UIDparentObj,
+                                        UidDCSource = oi_CIM.mvUID,
+                                        PoDCSource = oi_CIM.poUID,
 
                                         dcRec = obmenRec.DCreceiver,
-                                        NamedcRec = otiODUrecCIM.Namevalue,
+                                        NamedcRec = otiODUrecCIM.mvName,
                                         CategorydcRec = obmenRec.TypeOIrec,
                                         NumberOIrec = obmenRec.NumberOIrec,
-                                        UiddcRec = otiODUrecCIM.UIDvalue,
-                                        PodcRec = otiODUrecCIM.UIDparentObj,
+                                        UiddcRec = otiODUrecCIM.mvUID,
+                                        PodcRec = otiODUrecCIM.poUID,
                                         IsSendCDU = isSendCDU,
                                         Info = "Несоответсвие типа измерения: " + otiODUrecCIM.MeasValueType + " и " + oi_CIM.MeasValueType
-                                    });
+                                    });*/
                                /* ChekProtocolAll.Add(new Protocol()
                                     {
 
@@ -494,37 +494,56 @@ namespace Formulyar.ViewModel
                             }
                             catch (Exception e)
                             {
-                                //string inform = "В ИМ " + obmenRec.DCreceiver + " нет получаемой ОИ " + obmenRec.TypeOIrec + obmenRec.NumberOIrec + e.Message;
+                                exProtocolList.Add(new ExchangeProtocol()
+                                {
+                                    KontrolObjectName = otiODU.EnergyObject,
+                                    DcSource = obmenRec.DCsource,
+                                    NameDCSource = otiODU.NameOI,
+                                    CategoryDCSource = obmenRec.TypeOIsour,
+                                    NumberOIsource = obmenRec.NumberOIsour,
+                                    UidDCSource = oi_CIM.mvUID,
+                                    PoDCSource = oi_CIM.poUID,
+
+                                    dcRec = obmenRec.DCreceiver,
+                                    //NamedcRec = otiODUrecCIM.mvName,
+                                    CategorydcRec = obmenRec.TypeOIrec,
+                                    NumberOIrec = obmenRec.NumberOIrec,
+                                    //UiddcRec = otiODUrecCIM.mvUID,
+                                    //PodcRec = otiODUrecCIM.poUID,
+                                    IsSendCDU = isSendCDU,
+                                    Info = "В ИМ " + obmenRec.DCreceiver + " нет получаемой ОИ " + obmenRec.TypeOIrec + obmenRec.NumberOIrec
+                                });
+                               // string inform = "В ИМ " + obmenRec.DCreceiver + " нет получаемой ОИ " + obmenRec.TypeOIrec + obmenRec.NumberOIrec + e.Message;
                             }
                         }
                         foreach (ExchangeOTI obmenSour in exchangeRec)
                         {
                             try
                             {
-                                CIMObject otiODUsourCIM = otiCIMCollect.Single(x => x.DC == obmenSour.DCsource &&
-                                x.Type == obmenSour.TypeOIsour &&
-                                x.SourceID == obmenSour.NumberOIsour);
+                                CIMObject otiODUsourCIM = otiCIMCollect.First(x => x.DC == obmenSour.DCsource &&
+                                x.mvCat == obmenSour.TypeOIsour &&
+                                x.mvExternalId == obmenSour.NumberOIsour);
                                 isSendCDU = SourceCollect.Any(x => x.NumberOIsour == otiODU.NumberOI && x.TypeOIsour == otiODU.TypeOI && x.DCsource == otiODU.DispatchCenter && x.DCreceiver == "ЦДУ ИА");
                                 if (isSendCDU==false)
                                     isSendCDU = SourceCollect.Any(x => x.NumberOIsour == otiODU.NumberOI && x.TypeOIsour == otiODU.TypeOI && x.DCsource == otiODU.DispatchCenter &&  x.DCreceiver == "РДЦ ЦДУ ИА");
 
-                                if (otiODUsourCIM.UIDparentObj != oi_CIM.UIDparentObj)
+                                if (otiODUsourCIM.poUID != oi_CIM.poUID)
                                     exProtocolList.Add(new ExchangeProtocol()
                                     {
                                         KontrolObjectName = otiODU.EnergyObject,
                                         DcSource = obmenSour.DCsource,
-                                        NameDCSource = otiODUsourCIM.Namevalue,
+                                        NameDCSource = otiODUsourCIM.mvName,
                                         CategoryDCSource = obmenSour.TypeOIsour,
                                         NumberOIsource = obmenSour.NumberOIsour,
-                                        UidDCSource = otiODUsourCIM.UIDvalue,
-                                        PoDCSource = otiODUsourCIM.UIDparentObj,
+                                        UidDCSource = otiODUsourCIM.mvUID,
+                                        PoDCSource = otiODUsourCIM.poUID,
 
                                         dcRec = obmenSour.DCreceiver,
                                         NamedcRec = otiODU.NameOI,
                                         CategorydcRec = obmenSour.TypeOIrec,
                                         NumberOIrec = obmenSour.NumberOIrec,
-                                        UiddcRec = oi_CIM.UIDvalue,
-                                        PodcRec = oi_CIM.UIDparentObj,
+                                        UiddcRec = oi_CIM.mvUID,
+                                        PodcRec = oi_CIM.poUID,
                                         IsSendCDU = isSendCDU,
                                         Info = "Несоответсвие привязки в ИМ"
                                     });
@@ -545,26 +564,26 @@ namespace Formulyar.ViewModel
                                         Info = "Несоответсвие привязки в ИМ" /*+ otiODU.DispatchCenter + ": " + otiCIM_DC[i].UIDparentObj +
                                         "\n" + obmenRec.DCreceiver + ": " + otiODUrecCIM.UIDparentObj
                                     });*/
-                                else if (otiODUsourCIM.MeasValueType != oi_CIM.MeasValueType)
+                                /*else if (otiODUsourCIM.MeasValueType != oi_CIM.MeasValueType)
                                     exProtocolList.Add(new ExchangeProtocol()
                                     {
                                         KontrolObjectName = otiODU.EnergyObject,
                                         DcSource = obmenSour.DCsource,
-                                        NameDCSource = otiODUsourCIM.Namevalue,
+                                        NameDCSource = otiODUsourCIM.mvName,
                                         CategoryDCSource = obmenSour.TypeOIsour,
                                         NumberOIsource = obmenSour.NumberOIsour,
-                                        UidDCSource = otiODUsourCIM.UIDvalue,
-                                        PoDCSource = otiODUsourCIM.UIDparentObj,
+                                        UidDCSource = otiODUsourCIM.mvUID,
+                                        PoDCSource = otiODUsourCIM.poUID,
 
                                         dcRec = obmenSour.DCreceiver,
                                         NamedcRec = otiODU.NameOI,
                                         CategorydcRec = obmenSour.TypeOIrec,
                                         NumberOIrec = obmenSour.NumberOIrec,
-                                        UiddcRec = oi_CIM.UIDvalue,
-                                        PodcRec = oi_CIM.UIDparentObj,
+                                        UiddcRec = oi_CIM.mvUID,
+                                        PodcRec = oi_CIM.poUID,
                                         IsSendCDU = isSendCDU,
                                         Info = "Несоответсвие типа измерения: " + otiODUsourCIM.MeasValueType + " и " + oi_CIM.MeasValueType
-                                    });
+                                    });*/
                                 /*ChekProtocolAll.Add(new Protocol()
                                     {
                                         IsSendCDU = isSendCDU,
@@ -584,12 +603,50 @@ namespace Formulyar.ViewModel
                             }
                             catch (Exception e)
                             {
+                                exProtocolList.Add(new ExchangeProtocol()
+                                {
+                                    KontrolObjectName = otiODU.EnergyObject,
+                                    DcSource = obmenSour.DCsource,
+                                    //NameDCSource = otiODUsourCIM.mvName,
+                                    CategoryDCSource = obmenSour.TypeOIsour,
+                                    NumberOIsource = obmenSour.NumberOIsour,
+                                    //UidDCSource = otiODUsourCIM.mvUID,
+                                    //PoDCSource = otiODUsourCIM.poUID,
+
+                                    dcRec = obmenSour.DCreceiver,
+                                    NamedcRec = otiODU.NameOI,
+                                    CategorydcRec = obmenSour.TypeOIrec,
+                                    NumberOIrec = obmenSour.NumberOIrec,
+                                    UiddcRec = oi_CIM.mvUID,
+                                    PodcRec = oi_CIM.poUID,
+                                    IsSendCDU = isSendCDU,
+                                    Info = "В ИМ " + obmenSour.DCsource + " нет получаемой ОИ " + obmenSour.TypeOIsour + obmenSour.NumberOIsour
+                                });
                                 //string inform = "В ИМ " + obmenRec.DCreceiver + " нет получаемой ОИ " + obmenRec.TypeOIrec + obmenRec.NumberOIrec + e.Message;
                             }
                         }
                     }
                     catch
                     {
+                        exProtocolList.Add(new ExchangeProtocol()
+                        {
+                            //KontrolObjectName = otiODU.EnergyObject,
+                            DcSource = oi_CIM.DC,
+                            //NameDCSource = otiODUsourCIM.mvName,
+                            //CategoryDCSource = obmenSour.TypeOIsour,
+                            //NumberOIsource = obmenSour.NumberOIsour,
+                            //UidDCSource = otiODUsourCIM.mvUID,
+                            //PoDCSource = otiODUsourCIM.poUID,
+
+                            //dcRec = obmenSour.DCreceiver,
+                            //NamedcRec = otiODU.NameOI,
+                            CategorydcRec = oi_CIM.mvCat,
+                            NumberOIrec = oi_CIM.mvExternalId,
+                            UiddcRec = oi_CIM.mvUID,
+                            PodcRec = oi_CIM.poUID,
+                            IsSendCDU = isSendCDU,
+                            Info = " нет в БД СК-2007"
+                    });
                         //string inform = oi_CIM.SourceID + "("+oi_CIM.UIDvalue +")"+ " нет в БД СК-2007";
                     };
                 }                

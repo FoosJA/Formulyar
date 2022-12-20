@@ -8,16 +8,17 @@ namespace Formulyar.Model
 {
     class CIMObject
     {
-        public string UIDvalue;
-        public string Namevalue;
-        //public string SourceID;
-        public string HISvalue;
-        public string UIDparentObj;
-        public string NameparentObj;
+        public string mvUID;
+        public string mvName;
+        public int mvExternalId;
+        public string mvClass;
+        public string mvHIS;
+        public string poUID;
+        public string poName;
+        public string poClass;
         public string DC;
-        public string Type;
-        public int SourceID;
-        public string MeasValueSource;
-        public string MeasValueType;
+        public string mvCat;        
+       // public string MeasValueSource;
+        //TODO: public string MeasValueType;
     }
 }

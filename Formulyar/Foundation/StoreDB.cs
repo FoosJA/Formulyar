@@ -33,7 +33,7 @@ namespace Formulyar.Foundation
             MyObservableCollection<OperTechInform> otiCollect = new MyObservableCollection<OperTechInform>();
             using (var connection = new SqlConnection(connString))
             {
-               
+
                 connection.Open();
                 using (SqlCommand com = new SqlCommand(query, connection))
                 {
@@ -42,7 +42,7 @@ namespace Formulyar.Foundation
                     {
                         var dcsour = "";
                         if (reader[7] != System.DBNull.Value)
-                            dcsour =(string)reader[7];
+                            dcsour = (string)reader[7];
                         var txt = "";
                         if (reader[8] != System.DBNull.Value)
                             txt = (string)reader[8];
@@ -59,23 +59,37 @@ namespace Formulyar.Foundation
                         if (reader[12] != System.DBNull.Value)
                             mt = (string)reader[12];
                         var triggerOIK = false;
-                        if (reader[13] != System.DBNull.Value)                        
-                                triggerOIK = (bool)reader[13];                                                   
+                        if (reader[13] != System.DBNull.Value)
+                            triggerOIK = (bool)reader[13];
                         var triggerAIP = false;
                         if (reader[14] != System.DBNull.Value)
                             triggerAIP = (bool)reader[14];
                         var triggerCSPA = false;
-                        if (reader[15] != System.DBNull.Value )
+                        if (reader[15] != System.DBNull.Value)
                             triggerCSPA = (bool)reader[15];
-                        var triggerKOSMOS= false;
-                        if (reader[16] != System.DBNull.Value )
+                        var triggerKOSMOS = false;
+                        if (reader[16] != System.DBNull.Value)
                             triggerKOSMOS = (bool)reader[16];
 
-                        otiCollect.Add(new OperTechInform() { NumberOI = (int)reader[0], NameOI = (string)reader[1],
-                            TypeOI = (string)reader[2], TypeTI = (string)reader[3], Category = (string)reader[4],
-                            EnergyObject = (string)reader[5], DispatchCenter = (string)reader[6], DispatchCenterSour=dcsour,
-                            Formula =txt, FormulaCode=frm, CurrentTransform=tt, VoltagetTransform=tn, MeasureTransduse=mt,
-                            TriggerOIK=triggerOIK, TriggerAIP=triggerAIP, TriggerCSPA=triggerCSPA, TriggerKOSMOS=triggerKOSMOS
+                        otiCollect.Add(new OperTechInform()
+                        {
+                            NumberOI = (int)reader[0],
+                            NameOI = (string)reader[1],
+                            TypeOI = (string)reader[2],
+                            TypeTI = (string)reader[3],
+                            Category = (string)reader[4],
+                            EnergyObject = (string)reader[5],
+                            DispatchCenter = (string)reader[6],
+                            DispatchCenterSour = dcsour,
+                            Formula = txt,
+                            FormulaCode = frm,
+                            CurrentTransform = tt,
+                            VoltagetTransform = tn,
+                            MeasureTransduse = mt,
+                            TriggerOIK = triggerOIK,
+                            TriggerAIP = triggerAIP,
+                            TriggerCSPA = triggerCSPA,
+                            TriggerKOSMOS = triggerKOSMOS
                         });
                     }
                 }
@@ -83,13 +97,13 @@ namespace Formulyar.Foundation
             }
         }
 
+
         /// <summary>
         /// Запрос данных в аип
         /// </summary>
         /// <returns></returns>
         public MyObservableCollection<OperTechInform> GetOtiAIP()
         {
-
             var serverName = Properties.Settings.Default.ServerName ?? @"ck07-test3";
             var dbName = Properties.Settings.Default.DataBaseName ?? @"master";
             var query = SQLquery.OtiAIPQuery;
@@ -103,13 +117,12 @@ namespace Formulyar.Foundation
             MyObservableCollection<OperTechInform> otiCollect = new MyObservableCollection<OperTechInform>();
             using (var connection = new SqlConnection(connString))
             {
-
                 connection.Open();
                 using (SqlCommand com = new SqlCommand(query, connection))
                 {
                     var reader = com.ExecuteReader();
                     while (reader.Read())
-                    {                        
+                    {
                         otiCollect.Add(new OperTechInform()
                         {
                             NumberOI = (int)reader[0],
@@ -118,7 +131,7 @@ namespace Formulyar.Foundation
                             TypeTI = (string)reader[3],
                             Category = (string)reader[4],
                             EnergyObject = (string)reader[5],
-                            DispatchCenter = (string)reader[6]                            
+                            DispatchCenter = (string)reader[6]
                         });
                     }
                 }
@@ -161,65 +174,65 @@ namespace Formulyar.Foundation
                         }
                         str = str.Replace("Calc", string.Empty).Replace("Agr", string.Empty).Replace("aggr", string.Empty);
                         switch (str.Substring(0, 1))
-                            {
-                                case "I":
-                                    type = str.Replace("I", "ТИ").Substring(0, 2);
-                                    break;
-                                case "S":
-                                    type = str.Replace("S", "ТС").Substring(0, 2);
-                                    break;
-                                case "J":
-                                    type = str.Replace("J", "ИС").Substring(0, 2);
-                                    break;
-                                case "C":
-                                    type = str.Replace("C", "СП").Substring(0, 2);
-                                    break;
-                                case "H":
-                                    type = str.Replace("H", "ПВ").Substring(0, 2);
-                                    break;
-                                case "M":
-                                    type = str.Replace("M", "МСК").Substring(0, 2);
-                                    break;
-                                case "P":
-                                    type = str.Replace("P", "ПЛ").Substring(0, 2);
-                                    break;
-                                case "U":
-                                    type = str.Replace("U", "ЕИ").Substring(0, 2);
-                                    break;
-                                case "W":
-                                    type = str.Replace("W", "СВ").Substring(0, 2);
-                                    break;
-                                case "Л":
-                                    type = str.Replace("Л", "ЧАС").Substring(0, 2);
-                                    break;
-                                case "Б":
-                                    type = str.Replace("Б", "МИН").Substring(0, 2);
-                                    break;
-                                case "Г":
-                                    type = str.Replace("Г", "ПМИН").Substring(0, 2);
-                                    break;
-                                case "З":
-                                    type = str.Replace("З", "ДМИН").Substring(0, 2);
-                                    break;
-                                case "И":
-                                    type = str.Replace("И", "ЧЧАС").Substring(0, 2);
-                                    break;
-                                case "К":
-                                    type = str.Replace("К", "ПЧАС").Substring(0, 2);
-                                    break;
-                                case "П":
-                                    type = str.Replace("П", "СУТ").Substring(0, 2);
-                                    break;
-                                case "У":
-                                    type = str.Replace("У", "МЕС").Substring(0, 2);
-                                    break;
-                                case "Ф":
-                                    type = str.Replace("Ф", "ТМИН").Substring(0, 2);
-                                    break;
-                                default:
-                                    type = str.Substring(0, 1);
-                                    break;
-                            }
+                        {
+                            case "I":
+                                type = str.Replace("I", "ТИ").Substring(0, 2);
+                                break;
+                            case "S":
+                                type = str.Replace("S", "ТС").Substring(0, 2);
+                                break;
+                            case "J":
+                                type = str.Replace("J", "ИС").Substring(0, 2);
+                                break;
+                            case "C":
+                                type = str.Replace("C", "СП").Substring(0, 2);
+                                break;
+                            case "H":
+                                type = str.Replace("H", "ПВ").Substring(0, 2);
+                                break;
+                            case "M":
+                                type = str.Replace("M", "МСК").Substring(0, 2);
+                                break;
+                            case "P":
+                                type = str.Replace("P", "ПЛ").Substring(0, 2);
+                                break;
+                            case "U":
+                                type = str.Replace("U", "ЕИ").Substring(0, 2);
+                                break;
+                            case "W":
+                                type = str.Replace("W", "СВ").Substring(0, 2);
+                                break;
+                            case "Л":
+                                type = str.Replace("Л", "ЧАС").Substring(0, 2);
+                                break;
+                            case "Б":
+                                type = str.Replace("Б", "МИН").Substring(0, 2);
+                                break;
+                            case "Г":
+                                type = str.Replace("Г", "ПМИН").Substring(0, 2);
+                                break;
+                            case "З":
+                                type = str.Replace("З", "ДМИН").Substring(0, 2);
+                                break;
+                            case "И":
+                                type = str.Replace("И", "ЧЧАС").Substring(0, 2);
+                                break;
+                            case "К":
+                                type = str.Replace("К", "ПЧАС").Substring(0, 2);
+                                break;
+                            case "П":
+                                type = str.Replace("П", "СУТ").Substring(0, 2);
+                                break;
+                            case "У":
+                                type = str.Replace("У", "МЕС").Substring(0, 2);
+                                break;
+                            case "Ф":
+                                type = str.Replace("Ф", "ТМИН").Substring(0, 2);
+                                break;
+                            default:
+                                type = str.Substring(0, 1);
+                                break;
+                        }
                         try
                         {
                             id = Convert.ToInt32(str.Remove(0, 1));
@@ -227,18 +240,20 @@ namespace Formulyar.Foundation
                         catch
                         {
                             id = 0;
-                        }     
+                        }
                         CIMobjCollect.Add(new CIMObject()
                         {
-                            UIDvalue = (string)reader[0],
-                            Namevalue = (string)reader[1],
-                            SourceID = id,
-                            Type= type,
-                            HISvalue = (string)reader[3],
-                            UIDparentObj = (string)reader[4],
-                            NameparentObj = (string)reader[5],
-                            MeasValueType=(string)reader[6],
-                            MeasValueSource=(string)reader[7],
+                            mvUID = (string)reader[0],
+                            mvName = (string)reader[1],
+                            mvExternalId = id,
+                            mvCat = type,
+                            mvClass = (string)reader[3],
+                            mvHIS = (string)reader[4],
+                            poUID = (string)reader[5],
+                            poName = (string)reader[6],
+                            poClass = (string)reader[7],
+                            //MeasValueType=(string)reader[6],
+                            //MeasValueSource=(string)reader[7],
                             DC = (string)reader[8]
                         });
                     }
@@ -274,22 +289,22 @@ namespace Formulyar.Foundation
                     {
                         var form = "";
                         if (reader[7] != System.DBNull.Value)
-                        {                        
+                        {
                             form = (string)reader[7];
                         }
                         if ((string)reader[6] == "ТИ")
-                        sechCollect.Add(new Secheniya()
-                        {
-                            DispatchCenter = (string)reader[0],
-                            NameSech = (string)reader[1],
-                            IdSech=(int)reader[2],
-                            EnergyObject=(string)reader[3],
-                            NameOI = (string)reader[4],
-                            NumberOI = (int)reader[5],
-                            TypeOI =(string)reader[6],
-                            Formula=form,
-                            
-                        });
+                            sechCollect.Add(new Secheniya()
+                            {
+                                DispatchCenter = (string)reader[0],
+                                NameSech = (string)reader[1],
+                                IdSech = (int)reader[2],
+                                EnergyObject = (string)reader[3],
+                                NameOI = (string)reader[4],
+                                NumberOI = (int)reader[5],
+                                TypeOI = (string)reader[6],
+                                Formula = form,
+
+                            });
                     }
                 }
                 return sechCollect;
@@ -305,7 +320,7 @@ namespace Formulyar.Foundation
 
             var serverName = Properties.Settings.Default.ServerName ?? @"ck07-test3";
             var dbName = Properties.Settings.Default.DataBaseName ?? @"master";
-            var query =  SQLquery.OtiReception(oti);
+            var query = SQLquery.OtiReception(oti);
             var strBuilder = new SqlConnectionStringBuilder()
             {
                 DataSource = serverName,
@@ -384,7 +399,7 @@ namespace Formulyar.Foundation
                         //if (newVoltage.TypeOI=="ТИ")
                         voltageCollect.Add(newVoltage);
                     }
-                    
+
                 }
 
                 return voltageCollect;
@@ -426,7 +441,7 @@ namespace Formulyar.Foundation
                         if (reader[3] != System.DBNull.Value)
                             currentLine.EnergyObject = (string)reader[3];
                         if (reader[4] != System.DBNull.Value)
-                            currentLine.IdEnergyObject = (int)reader[4];                        
+                            currentLine.IdEnergyObject = (int)reader[4];
                         if (reader[5] != System.DBNull.Value)
                             currentLine.NameOIfact = (string)reader[5];
                         if (reader[6] != System.DBNull.Value)
@@ -454,9 +469,9 @@ namespace Formulyar.Foundation
                         if (reader[17] != System.DBNull.Value)
                             currentLine.NameS = (string)reader[17];
                         if (reader[18] != System.DBNull.Value)
-                            currentLine.NumberS = (int)reader[18];                     
+                            currentLine.NumberS = (int)reader[18];
 
-                            currentLineCollect.Add(currentLine);
+                        currentLineCollect.Add(currentLine);
                     }
                 }
                 return currentLineCollect;
@@ -509,7 +524,7 @@ namespace Formulyar.Foundation
                         if (reader[8] != System.DBNull.Value)
                             currentTransform.Formula = (string)reader[8];
                         if (reader[9] != System.DBNull.Value)
-                            currentTransform.FormulaCode = (string)reader[9];                       
+                            currentTransform.FormulaCode = (string)reader[9];
                         if (reader[10] != System.DBNull.Value)
                             currentTransform.NameRpn = (string)reader[10];
                         if (reader[11] != System.DBNull.Value)
@@ -625,8 +640,17 @@ namespace Formulyar.Foundation
                     var reader = com.ExecuteReader();
                     while (reader.Read())
                     {
-                        currentEquipmentCollect.Add(new CurrentEquipment() { DispatchCenter = (string)reader[0], EnergyObject = (string)reader[1], NameEquipment=(string)reader[2], TypeOTI=(string)reader[3], NumberOTI=(int)reader[4],
-                        Formula=(string)reader[5], FormulaCode=(string)reader[6],NameOTI=(string)reader[7]});
+                        currentEquipmentCollect.Add(new CurrentEquipment()
+                        {
+                            DispatchCenter = (string)reader[0],
+                            EnergyObject = (string)reader[1],
+                            NameEquipment = (string)reader[2],
+                            TypeOTI = (string)reader[3],
+                            NumberOTI = (int)reader[4],
+                            Formula = (string)reader[5],
+                            FormulaCode = (string)reader[6],
+                            NameOTI = (string)reader[7]
+                        });
 
                     }
                 }
@@ -672,7 +696,7 @@ namespace Formulyar.Foundation
             var serverName = Properties.Settings.Default.ServerName ?? @"ck07-test3";
             var dbName = @"LSA_test";
             var queryKPOS = SQLquery.CheckInfoKPOS;
-            var queryMUN= SQLquery.CheckInfoMUN;
+            var queryMUN = SQLquery.CheckInfoMUN;
             var querySMTN_Line = SQLquery.CheckInfoSMTN_Line;
             var querySMTN_Transform = SQLquery.CheckInfoSMTN_Transform;
 
@@ -743,13 +767,13 @@ namespace Formulyar.Foundation
                             check.NumberOIreception = (int)reader1[10];
                         if ((check.DcSource == null) || (check.DcSource == "-"))
                         {
-                            check.Info = "МУН: ОТИ контролируется только в одном ДЦ РУ: "+ (int)reader1[2] +
+                            check.Info = "МУН: ОТИ контролируется только в одном ДЦ РУ: " + (int)reader1[2] +
                                 "кВ; контроль: " + (string)reader1[3];
                         }
                         else
                         {
                             check.Info = "МУН: Несоответсвие применения ОТИ в ДЦ РУ: " + (int)reader1[2]
-                                + "кВ; контроль: "+(string)reader1[3];
+                                + "кВ; контроль: " + (string)reader1[3];
                         }
                         checkInfo.Add(check);
                     }
@@ -767,9 +791,9 @@ namespace Formulyar.Foundation
                     {
                         Protocol check = new Protocol();
                         check.DispatchCenter = (string)reader3[1];
-                        check.KontrolObjectName ="Объект: "+(string)reader3[2]+" Присоединение: " + (string)reader3[3];
+                        check.KontrolObjectName = "Объект: " + (string)reader3[2] + " Присоединение: " + (string)reader3[3];
                         check.NumberOI = (int)reader3[4];
-                        check.TypeOI ="ТИ";
+                        check.TypeOI = "ТИ";
                         if (reader3[9] != System.DBNull.Value)
                             check.DcSource = (string)reader3[9];
                         if (reader3[10] != System.DBNull.Value)
@@ -778,7 +802,7 @@ namespace Formulyar.Foundation
                             check.NumberOIsource = (int)reader3[11];
                         if (reader3[12] != System.DBNull.Value)
                             check.NumberOIreception = (int)reader3[12];
-                        if ((check.DcSource == null)|| (check.DcSource == "-"))
+                        if ((check.DcSource == null) || (check.DcSource == "-"))
                         {
                             check.Info = "СМТН_ЛЭП: ОТИ контролируется только в одном ДЦ! Присоединение : " + (string)reader3[3];
                         }
@@ -815,7 +839,7 @@ namespace Formulyar.Foundation
                             check.NumberOIreception = (int)reader4[9];
                         if ((check.DcSource == null) || (check.DcSource == "-"))
                         {
-                            check.Info = "СМТН_АТ(Т): ОТИ контролируется только в одном ДЦ! АТ(Т) : " + (string)reader4[3] +" "+ (string)reader4[4];
+                            check.Info = "СМТН_АТ(Т): ОТИ контролируется только в одном ДЦ! АТ(Т) : " + (string)reader4[3] + " " + (string)reader4[4];
                         }
                         else
                         {
@@ -844,7 +868,7 @@ namespace Formulyar.Foundation
                 IntegratedSecurity = true,
                 InitialCatalog = dbName
             };
-            var connString = strBuilder.ConnectionString; 
+            var connString = strBuilder.ConnectionString;
             MyObservableCollection<Aopo> aopoCollect = new MyObservableCollection<Aopo>();
             using (var connection = new SqlConnection(connString))
             {
@@ -864,7 +888,7 @@ namespace Formulyar.Foundation
                         if (reader[3] != System.DBNull.Value)
                             newAopo.EnergyObject = (string)reader[3];
                         if (reader[4] != System.DBNull.Value)
-                            newAopo.Step = (int)reader[4];                        
+                            newAopo.Step = (int)reader[4];
                         if (reader[5] != System.DBNull.Value)
                             newAopo.ElementName = (string)reader[5];
 
@@ -912,16 +936,16 @@ namespace Formulyar.Foundation
                 connection.Open();
                 var query = SQLquery.savePasport();
                 SqlCommand sqlcom = new SqlCommand("TRUNCATE TABLE LSa_test..PTIpasport", connection);
-                sqlcom.ExecuteNonQuery();               
+                sqlcom.ExecuteNonQuery();
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
-                DataTable dt = ds.Tables[0];               
+                DataTable dt = ds.Tables[0];
                 for (int i = 0; i < otiCollection.Count; i++)
-                {                    
+                {
                     OperTechInform oti = otiCollection[i];
                     DataRow newRow = dt.NewRow();
-                    if (oti.CurrentTransform!="" || oti.VoltagetTransform!="" || oti.MeasureTransduse!="")
+                    if (oti.CurrentTransform != "" || oti.VoltagetTransform != "" || oti.MeasureTransduse != "")
                     {
                         newRow["DC"] = oti.DispatchCenter;
                         newRow["NumbOti"] = oti.NumberOI;
@@ -934,8 +958,8 @@ namespace Formulyar.Foundation
                         adapter.Update(dt);
                         ds.Clear();
                     }
-                    
-                }           
+
+                }
                 return true;
             }
         }
@@ -965,7 +989,7 @@ namespace Formulyar.Foundation
                 {
                     OperTechInform oti = otiCollection[i];
                     DataRow newRow = dt.NewRow();
-                    if (oti.TriggerAIP ==true || oti.TriggerOIK == true || oti.TriggerCSPA == true || oti.TriggerKOSMOS == true)
+                    if (oti.TriggerAIP == true || oti.TriggerOIK == true || oti.TriggerCSPA == true || oti.TriggerKOSMOS == true)
                     {
                         newRow["DC"] = oti.DispatchCenter;
                         newRow["NumbOti"] = oti.NumberOI;
@@ -1131,8 +1155,11 @@ namespace Formulyar.Foundation
                     while (reader.Read())
                     {
                         commonSechCollect.Add(new CommonSech()
-                        { DC1 = (string)reader[1], IDsech1 = (int)reader[2],
-                            DC2 = (string)reader[3], IDsech2 = (int)reader[4]
+                        {
+                            DC1 = (string)reader[1],
+                            IDsech1 = (int)reader[2],
+                            DC2 = (string)reader[3],
+                            IDsech2 = (int)reader[4]
                         });
                     }
                 }
